@@ -8,7 +8,7 @@
       name="description"
       content="Mohammad Alhabsh — backend engineer building scalable server-side systems and AI-powered applications with Node.js, Express, PostgreSQL and Genkit."
     />
-    <meta name="theme-color" content="#09080f" />
+    <meta name="theme-color" content="#0b0a08" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Mohammad Alhabsh — Backend Engineer" />
     <meta
@@ -19,7 +19,7 @@
     <meta property="og:image" content="https://mohammadhabash12.github.io/image.jpg" />
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2309080f'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='38' fill='%23b39dfb'%3EM%3C/text%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0a08'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='38' fill='%23e3a868'%3EM%3C/text%3E%3C/svg%3E"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -50,21 +50,24 @@
 
       /* ── Tokens ── */
       :root {
-        --bg: #09080f;
-        --bg-2: #0d0b16;
-        --surface: rgba(237, 232, 255, 0.03);
-        --surface-2: rgba(237, 232, 255, 0.06);
-        --line: rgba(237, 232, 255, 0.09);
-        --line-2: rgba(237, 232, 255, 0.17);
-        --text: #f2eefc;
-        --text-2: #b3abcb;
-        --text-3: #8a81a6;
-        --accent: #b39dfb;
-        --accent-2: #8f73f2;
-        --glow: rgba(167, 139, 250, 0.13);
-        --glow-strong: rgba(167, 139, 250, 0.45);
-        --grad: linear-gradient(115deg, #e2d9ff 0%, #a78bfa 48%, #f2b8dc 100%);
-        --dot: 190, 172, 255;
+        --bg: #0b0a08;
+        --bg-2: #100e0b;
+        --surface: rgba(245, 236, 220, 0.03);
+        --surface-2: rgba(245, 236, 220, 0.06);
+        --line: rgba(245, 236, 220, 0.09);
+        --line-2: rgba(245, 236, 220, 0.17);
+        --text: #f4efe6;
+        --text-2: #b9b0a1;
+        --text-3: #8c8375;
+        --accent: #e3a868;
+        --accent-2: #c98444;
+        --glow: rgba(227, 168, 104, 0.11);
+        --glow-strong: rgba(227, 168, 104, 0.42);
+        --grad: linear-gradient(115deg, #f7e7c9 0%, #e3a868 48%, #e07a5f 100%);
+        --dot: 236, 200, 150;
+        --scrim: rgba(11, 10, 8, 0.84);
+        --aurora-1: #b4541f;
+        --aurora-2: #7a3b5d;
         --aurora: 0.2;
         --grain: 0.04;
 
@@ -80,22 +83,24 @@
       }
 
       [data-theme="light"] {
-        --bg: #f6f3ee;
-        --bg-2: #efebe4;
-        --surface: rgba(23, 16, 48, 0.03);
-        --surface-2: rgba(23, 16, 48, 0.06);
-        --line: rgba(23, 16, 48, 0.1);
-        --line-2: rgba(23, 16, 48, 0.2);
-        --text: #17132a;
-        --text-2: #4f4768;
-        --text-3: #776f8e;
-        --accent: #6a4be0;
-        --accent-2: #5335c6;
-        --glow: rgba(106, 75, 224, 0.09);
-        --glow-strong: rgba(106, 75, 224, 0.35);
-        --grad: linear-gradient(115deg, #4a2ec2 0%, #7b5cf0 50%, #c2478f 100%);
-        --dot: 74, 46, 194;
-        --aurora: 0.16;
+        --bg: #f6f2ea;
+        --bg-2: #eee8dc;
+        --surface: rgba(40, 28, 12, 0.03);
+        --surface-2: rgba(40, 28, 12, 0.06);
+        --line: rgba(40, 28, 12, 0.11);
+        --line-2: rgba(40, 28, 12, 0.22);
+        --text: #1c1711;
+        --text-2: #564c3f;
+        --text-3: #74695a;
+        --accent: #b3521f;
+        --accent-2: #933f14;
+        --glow: rgba(179, 82, 31, 0.09);
+        --glow-strong: rgba(179, 82, 31, 0.35);
+        --grad: linear-gradient(115deg, #8f3a12 0%, #c2622d 50%, #b23a5b 100%);
+        --dot: 150, 70, 25;
+        --aurora-1: #e9964f;
+        --aurora-2: #d98aa0;
+        --aurora: 0.22;
         --grain: 0.05;
       }
 
@@ -469,7 +474,7 @@
         height: 620px;
         top: -220px;
         right: -120px;
-        background: #7c3aed;
+        background: var(--aurora-1);
         animation: drift 22s ease-in-out infinite alternate;
       }
       .aurora.a2 {
@@ -477,7 +482,7 @@
         height: 460px;
         bottom: -160px;
         left: -140px;
-        background: #db7fb8;
+        background: var(--aurora-2);
         opacity: calc(var(--aurora) * 0.55);
         animation: drift 28s ease-in-out infinite alternate-reverse;
       }
@@ -640,15 +645,15 @@
 
       /* ── Terminal (stays dark in both themes) ── */
       .terminal {
-        --t-line: rgba(237, 232, 255, 0.1);
-        --t-text: #e9e4fb;
-        --t-dim: #8d84ab;
-        --t-accent: #b9a5ff;
+        --t-line: rgba(245, 236, 220, 0.1);
+        --t-text: #efe9dd;
+        --t-dim: #948a7a;
+        --t-accent: #e9b77e;
         --t-ok: #8fe3b0;
         position: relative;
         border: 1px solid var(--t-line);
         border-radius: var(--r-lg);
-        background: linear-gradient(180deg, rgba(24, 20, 42, 0.92), rgba(12, 10, 22, 0.94));
+        background: linear-gradient(180deg, rgba(28, 24, 18, 0.92), rgba(14, 12, 9, 0.94));
         box-shadow:
           0 50px 90px -50px rgba(0, 0, 0, 0.8),
           0 0 0 1px rgba(255, 255, 255, 0.02) inset;
@@ -755,7 +760,7 @@
         caret-color: var(--t-accent);
       }
       #termInput::placeholder {
-        color: rgba(141, 132, 171, 0.55);
+        color: rgba(148, 138, 122, 0.55);
       }
       .term-chips {
         display: flex;
@@ -787,7 +792,7 @@
       .term-chips button:hover {
         border-color: var(--t-accent);
         color: var(--t-accent);
-        background: rgba(185, 165, 255, 0.08);
+        background: rgba(233, 183, 126, 0.08);
       }
 
       /* ── Marquee ── */
@@ -982,7 +987,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(180deg, transparent 52%, rgba(9, 8, 15, 0.82));
+        background: linear-gradient(180deg, transparent 52%, var(--scrim));
         pointer-events: none;
       }
       .portrait-cap {
@@ -2157,11 +2162,11 @@
         /* ── Theme ── */
         const themeBtn = $("#themeToggle");
         const themeMeta = $('meta[name="theme-color"]');
-        let dotColor = "190, 172, 255";
+        let dotColor = "236, 200, 150";
 
         function applyTheme(theme) {
           root.dataset.theme = theme;
-          themeMeta.content = theme === "light" ? "#f6f3ee" : "#09080f";
+          themeMeta.content = theme === "light" ? "#f6f2ea" : "#0b0a08";
           themeBtn.setAttribute(
             "aria-label",
             `Switch to ${theme === "light" ? "dark" : "light"} theme`,
