@@ -65,7 +65,6 @@
         --glow-strong: rgba(227, 168, 104, 0.42);
         --grad: linear-gradient(115deg, #f7e7c9 0%, #e3a868 48%, #e07a5f 100%);
         --dot: 236, 200, 150;
-        --scrim: rgba(11, 10, 8, 0.84);
         --aurora-1: #b4541f;
         --aurora-2: #7a3b5d;
         --aurora: 0.2;
@@ -134,6 +133,19 @@
 
       body.menu-open {
         overflow: hidden;
+      }
+
+      /* Short colour fade while the theme switches */
+      .theming,
+      .theming *,
+      .theming *::before,
+      .theming *::after {
+        transition:
+          background-color 0.45s ease,
+          color 0.45s ease,
+          border-color 0.45s ease,
+          fill 0.45s ease,
+          stroke 0.45s ease !important;
       }
 
       ::selection {
@@ -952,7 +964,7 @@
       /* ── About ── */
       .about-grid {
         display: grid;
-        grid-template-columns: minmax(260px, 390px) 1fr;
+        grid-template-columns: minmax(240px, 320px) 1fr;
         gap: clamp(2.5rem, 7vw, 6rem);
         align-items: start;
       }
@@ -962,18 +974,26 @@
       }
       .portrait-frame {
         position: relative;
-        aspect-ratio: 1 / 1.1;
-        border: 1px solid var(--line-2);
-        border-radius: var(--r-lg);
+        width: 200px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        outline: 1px solid var(--line-2);
+        outline-offset: 7px;
+        margin: 7px;
         background: var(--bg-2);
         overflow: hidden;
+        transition:
+          transform 0.5s var(--ease),
+          outline-color 0.4s;
+      }
+      .portrait-frame:hover {
+        outline-color: var(--accent);
       }
       .portrait-frame img {
         display: block;
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: 50% 15%;
         filter: saturate(0.88);
         transition:
           transform 1.4s var(--ease),
@@ -983,30 +1003,20 @@
         transform: scale(1.045);
         filter: none;
       }
-      .portrait-frame::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, transparent 52%, var(--scrim));
-        pointer-events: none;
-      }
       .portrait-cap {
-        position: absolute;
-        left: 1.35rem;
-        right: 1.35rem;
-        bottom: 1.2rem;
-        z-index: 1;
-        color: #fff;
+        margin-top: 1.6rem;
       }
       .portrait-cap strong {
         display: block;
         font: 400 1.65rem/1.15 var(--font-display);
       }
       .portrait-cap span {
+        display: block;
+        margin-top: 0.35rem;
         font: 400 0.6875rem var(--font-mono);
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.72);
+        color: var(--text-3);
       }
       .socials {
         display: flex;
@@ -1556,7 +1566,9 @@
         }
         .portrait {
           position: static;
-          max-width: 24rem;
+        }
+        .portrait-frame {
+          width: 160px;
         }
         .stack-row,
         .xp-item {
@@ -1783,10 +1795,10 @@
                 height="997"
                 loading="lazy"
               />
-              <div class="portrait-cap">
-                <strong>Mohammad Alhabsh</strong>
-                <span>Backend Engineer · AI Builder</span>
-              </div>
+            </div>
+            <div class="portrait-cap">
+              <strong>Mohammad Alhabsh</strong>
+              <span>Backend Engineer · AI Builder</span>
             </div>
             <div class="socials">
               <a class="social" href="https://github.com/MohammadHabash12" target="_blank" rel="noopener">
@@ -2028,19 +2040,19 @@
 
         <div class="xp">
           <article class="xp-item reveal">
-            <div class="xp-when"><span class="badge-dot"></span>2025 — Present</div>
+            <div class="xp-when">May 2025 – Dec 2025</div>
             <div>
               <h3>AI Engineer</h3>
               <div class="xp-co">Luminexus</div>
             </div>
             <div>
               <p class="xp-desc">
-                I build AI systems that do actual work. My RAG pipelines run on
+                I built AI systems that did actual work. My RAG pipelines ran on
                 Genkit with PostgreSQL and Vector Store Databases, covering the
                 full flow from chunking and embedding to retrieval and prompt
-                assembly. I also integrate computer vision via OpenCV — object
+                assembly. I also integrated computer vision via OpenCV — object
                 detection, frame analysis, preprocessing for downstream models.
-                All of it feeds into a single direction: building AI automation.
+                All of it fed into a single direction: building AI automation.
               </p>
               <ul class="tags">
                 <li>RAG</li>
@@ -2163,6 +2175,7 @@
         const themeBtn = $("#themeToggle");
         const themeMeta = $('meta[name="theme-color"]');
         let dotColor = "236, 200, 150";
+        let themeTimer = 0;
 
         function applyTheme(theme) {
           root.dataset.theme = theme;
@@ -2178,11 +2191,13 @@
           try {
             localStorage.setItem("theme", next);
           } catch (e) {}
-          if (document.startViewTransition && !reduceMotion) {
-            document.startViewTransition(() => applyTheme(next));
-          } else {
-            applyTheme(next);
+          // Fade colours briefly; the switch itself is applied immediately.
+          if (!reduceMotion) {
+            root.classList.add("theming");
+            clearTimeout(themeTimer);
+            themeTimer = setTimeout(() => root.classList.remove("theming"), 500);
           }
+          applyTheme(next);
           return next;
         }
         applyTheme(root.dataset.theme || "dark");
@@ -2461,7 +2476,7 @@
               kv("ai", "LangChain.js · Genkit · OpenCV"),
               kv("ops", "Docker · Nginx · Linux · Git"),
             ],
-            experience: () => [kv("2025 — now", "AI Engineer @ Luminexus")],
+            experience: () => [kv("May–Dec 2025", "AI Engineer @ Luminexus")],
             contact: () => [
               kv("email", link(EMAIL, "mailto:" + EMAIL)),
               kv("linkedin", link("in/mohammad-alhabash", "https://www.linkedin.com/in/mohammad-alhabash/")),
