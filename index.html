@@ -16,7 +16,6 @@
       content="I design and build scalable server-side systems with a focus on performance, reliability, and real-world impact."
     />
     <meta property="og:url" content="https://mohammadhabash12.github.io/" />
-    <meta property="og:image" content="https://mohammadhabash12.github.io/image.jpg" />
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0a08'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='38' fill='%23e3a868'%3EM%3C/text%3E%3C/svg%3E"
@@ -972,40 +971,6 @@
         position: sticky;
         top: 6.5rem;
       }
-      .portrait-frame {
-        position: relative;
-        width: 200px;
-        aspect-ratio: 1;
-        border-radius: 50%;
-        outline: 1px solid var(--line-2);
-        outline-offset: 7px;
-        margin: 7px;
-        background: var(--bg-2);
-        overflow: hidden;
-        transition:
-          transform 0.5s var(--ease),
-          outline-color 0.4s;
-      }
-      .portrait-frame:hover {
-        outline-color: var(--accent);
-      }
-      .portrait-frame img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: saturate(0.88);
-        transition:
-          transform 1.4s var(--ease),
-          filter 0.8s;
-      }
-      .portrait-frame:hover img {
-        transform: scale(1.045);
-        filter: none;
-      }
-      .portrait-cap {
-        margin-top: 1.6rem;
-      }
       .portrait-cap strong {
         display: block;
         font: 400 1.65rem/1.15 var(--font-display);
@@ -1567,9 +1532,6 @@
         .portrait {
           position: static;
         }
-        .portrait-frame {
-          width: 160px;
-        }
         .stack-row,
         .xp-item {
           grid-template-columns: 1fr;
@@ -1787,15 +1749,6 @@
 
         <div class="about-grid">
           <aside class="portrait reveal">
-            <div class="portrait-frame tilt">
-              <img
-                src="image.jpg"
-                alt="Portrait of Mohammad Alhabash"
-                width="998"
-                height="997"
-                loading="lazy"
-              />
-            </div>
             <div class="portrait-cap">
               <strong>Mohammad Alhabash</strong>
               <span>Backend Engineer · AI Builder</span>

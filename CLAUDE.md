@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Mohammad Alhabash's personal portfolio: a static, single-page site with no build step, dependencies, linter or tests. The whole site is `index.html` (inline `<style>` and `<script>`) plus `image.jpg` (the portrait). Fonts come from Google Fonts; nothing else is loaded externally.
+Mohammad Alhabash's personal portfolio: a static, single-page site with no build step, dependencies, linter or tests. The whole site is `index.html` (inline `<style>` and `<script>`). Fonts come from Google Fonts; nothing else is loaded externally. `_config.yml` keeps repo-only files (`CLAUDE.md`, and `image.jpg`, an old portrait the site no longer shows) out of the GitHub Pages build; add any new repo-only file there.
 
 ## Run and deploy
 
@@ -24,7 +24,7 @@ Mohammad Alhabash's personal portfolio: a static, single-page site with no build
 - The contact email is in the `EMAIL` constant, the `mailto:` links, and the copy button's `data-copy`.
 - Section ids must match the `SECTIONS` array (used by the nav scroll-spy and the terminal's `cd`), the desktop nav links, and the mobile menu links.
 - The marquee has two identical `.marquee-group` blocks; the infinite scroll relies on them matching.
-- The name ("Mohammad Alhabash") also appears in `<title>`, meta/OG tags, the portrait caption and alt text, and the footer.
+- The name ("Mohammad Alhabash") also appears in `<title>`, meta/OG tags, the About sidebar, and the footer.
 
 **Behaviour** is a single IIFE at the end of `<body>`: nav scroll state and progress bar, an IntersectionObserver scroll-spy, the mobile menu (uses `inert`), reveal-on-scroll, stat count-up, pointer spotlight/tilt on `.spot`/`.tilt` (fine pointers only), the dot-grid canvas (paused when the hero is off-screen), the terminal, copy-email, and the contact form. There is no form backend: the form builds a `mailto:` draft.
 

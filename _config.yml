@@ -2,3 +2,4 @@
 # Repo notes that should stay on GitHub but not be published as pages of the site.
 exclude:
   - CLAUDE.md
+  - image.jpg # old portrait, kept in the repo but no longer used by the site
