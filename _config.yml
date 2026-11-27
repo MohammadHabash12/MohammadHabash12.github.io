@@ -1,0 +1,4 @@
+# GitHub Pages build settings.
+# Repo notes that should stay on GitHub but not be published as pages of the site.
+exclude:
+  - CLAUDE.md
