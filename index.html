@@ -1176,68 +1176,49 @@
           opacity: 1;
         }
       }
-      /* RAG illustration: docs → vector store → cited answer */
-      .viz-page {
-        fill: var(--bg);
-      }
-      .viz-text {
-        stroke-width: 2;
-        opacity: 0.5;
-      }
-      .viz-chunk {
-        stroke: var(--accent);
-        stroke-width: 2;
-        animation: lock 3.6s ease-in-out infinite;
-        animation-delay: calc(var(--i) * 0.9s);
-      }
-      .viz-db {
-        fill: var(--surface-2);
-      }
-      .viz-vec {
-        fill: var(--text-3);
-        stroke: none;
-        opacity: 0.6;
-      }
-      .viz-hit {
-        fill: var(--accent);
-        stroke: none;
-        animation: lock 2.4s ease-in-out infinite;
-        animation-delay: calc(var(--i) * 0.6s);
-      }
-      .viz-flow {
-        stroke: var(--accent);
-        stroke-dasharray: 2 6;
-        animation: flow 1.2s linear infinite;
-      }
-      .project:hover .viz-flow {
-        animation-duration: 0.5s;
-      }
-      @keyframes flow {
-        to {
-          stroke-dashoffset: -16;
-        }
-      }
-      .viz-msg rect {
+      .viz-bubble rect {
         fill: var(--surface-2);
         stroke: var(--line-2);
       }
-      .viz-msg line {
+      .viz-bubble.me rect {
+        fill: color-mix(in srgb, var(--accent) 22%, transparent);
+        stroke: var(--accent);
+      }
+      .viz-bubble line {
         stroke-width: 2.4;
         opacity: 0.6;
       }
-      .viz-msg.bot rect {
-        fill: color-mix(in srgb, var(--accent) 18%, transparent);
+      .viz-bubble.me line {
         stroke: var(--accent);
       }
-      .viz-msg.bot line {
-        stroke: var(--accent);
+      .viz-dot {
+        fill: var(--text-2);
+        stroke: none;
+        transform-box: fill-box;
+        animation: bounce 1.3s ease-in-out infinite;
+        animation-delay: calc(var(--i) * 0.16s);
       }
-      .viz-src rect {
-        stroke: var(--accent);
-        opacity: 0.7;
+      @keyframes bounce {
+        0%,
+        60%,
+        100% {
+          transform: none;
+          opacity: 0.45;
+        }
+        30% {
+          transform: translateY(-5px);
+          opacity: 1;
+        }
       }
-      .viz-src text {
-        fill: var(--accent);
+      .viz-bubble {
+        transition: transform 0.7s var(--ease);
+        transition-delay: calc(var(--i) * 70ms);
+      }
+      .project:hover .viz-bubble {
+        transform: translateX(6px);
+      }
+      .project:hover .viz-bubble.me {
+        transform: translateX(-6px);
       }
 
       .project-body {
@@ -1946,74 +1927,39 @@
             <article class="project spot tilt">
               <div class="project-viz" aria-hidden="true">
                 <svg class="viz" viewBox="0 0 400 170">
-                  <!-- Source documents, with chunks being picked out -->
-                  <g transform="translate(30 34)">
-                    <rect class="viz-page" x="12" y="0" width="50" height="70" rx="5" />
-                    <path class="viz-page" d="M0 15a5 5 0 0 1 5-5h33l14 14v51a5 5 0 0 1-5 5H5a5 5 0 0 1-5-5z" />
-                    <path d="M38 10v14h14" />
-                    <line class="viz-text" x1="8" y1="34" x2="40" y2="34" />
-                    <line class="viz-chunk" style="--i: 0" x1="8" y1="43" x2="44" y2="43" />
-                    <line class="viz-text" x1="8" y1="52" x2="36" y2="52" />
-                    <line class="viz-chunk" style="--i: 1" x1="8" y1="61" x2="44" y2="61" />
-                    <line class="viz-text" x1="8" y1="70" x2="30" y2="70" />
+                  <g class="viz-bubble" style="--i: 0">
+                    <rect x="48" y="18" width="180" height="36" rx="18" />
+                    <line x1="70" y1="36" x2="176" y2="36" />
                   </g>
-                  <!-- Embeddings flow into the vector store -->
-                  <path class="viz-flow" d="M98 80H144" />
-                  <path class="viz-db" d="M150 50v62a32 9 0 0 0 64 0V50" />
-                  <ellipse class="viz-db" cx="182" cy="50" rx="32" ry="9" />
-                  <path d="M150 81a32 9 0 0 0 64 0" />
-                  <circle class="viz-vec" cx="163" cy="70" r="2.2" />
-                  <circle class="viz-vec" cx="176" cy="73" r="2.2" />
-                  <circle class="viz-hit" style="--i: 0" cx="191" cy="68" r="2.8" />
-                  <circle class="viz-vec" cx="204" cy="74" r="2.2" />
-                  <circle class="viz-vec" cx="168" cy="98" r="2.2" />
-                  <circle class="viz-hit" style="--i: 1" cx="183" cy="103" r="2.8" />
-                  <circle class="viz-vec" cx="198" cy="96" r="2.2" />
-                  <circle class="viz-vec" cx="206" cy="106" r="2.2" />
-                  <circle class="viz-vec" cx="172" cy="111" r="2.2" />
-                  <!-- Question goes in, grounded answer comes out -->
-                  <g class="viz-msg">
-                    <rect x="262" y="26" width="112" height="30" rx="15" />
-                    <line x1="278" y1="41" x2="346" y2="41" />
+                  <g class="viz-bubble me" style="--i: 1">
+                    <rect x="188" y="67" width="164" height="36" rx="18" />
+                    <line x1="210" y1="85" x2="312" y2="85" />
                   </g>
-                  <path class="viz-flow" d="M258 41C234 41 230 46 218 50" />
-                  <path class="viz-flow" d="M218 96C230 96 234 93 246 93" />
-                  <g class="viz-msg bot">
-                    <rect x="250" y="70" width="128" height="46" rx="16" />
-                    <line x1="266" y1="87" x2="358" y2="87" />
-                    <line x1="266" y1="100" x2="326" y2="100" />
+                  <g class="viz-bubble" style="--i: 2">
+                    <rect x="48" y="116" width="86" height="36" rx="18" />
+                    <circle class="viz-dot" style="--i: 0" cx="75" cy="134" r="3.2" />
+                    <circle class="viz-dot" style="--i: 1" cx="91" cy="134" r="3.2" />
+                    <circle class="viz-dot" style="--i: 2" cx="107" cy="134" r="3.2" />
                   </g>
-                  <g class="viz-src">
-                    <rect x="250" y="122" width="30" height="15" rx="7.5" />
-                    <text class="viz-label" x="265" y="132.5" text-anchor="middle">[1]</text>
-                    <rect x="286" y="122" width="30" height="15" rx="7.5" />
-                    <text class="viz-label" x="301" y="132.5" text-anchor="middle">[2]</text>
-                  </g>
-                  <text class="viz-label" x="60" y="156" text-anchor="middle">DOCS</text>
-                  <text class="viz-label" x="182" y="156" text-anchor="middle">VECTOR STORE</text>
-                  <text class="viz-label" x="314" y="156" text-anchor="middle">CITED ANSWER</text>
                 </svg>
               </div>
               <div class="project-body">
-                <div class="project-meta"><span>02</span><span>AI · LLM &amp; RAG</span></div>
-                <h3>Grounded AI Assistants</h3>
+                <div class="project-meta"><span>02</span><span>Real-time · Web</span></div>
+                <h3>ChatCord</h3>
                 <p>
-                  Designed and deployed end-to-end conversational AI chatbots
-                  powered by large language models, handling intent recognition,
-                  context management, and multi-turn dialogue. Built
-                  production-grade RAG pipelines (document ingestion, chunking,
-                  embeddings and vector store retrieval) to ground answers in
-                  domain-specific knowledge, then tuned embedding models,
-                  similarity thresholds and re-ranking to reduce hallucination.
-                  Logging and evaluation pipelines track response quality in
-                  production.
+                  Built a real-time chat web application using Node.js and
+                  Express, supporting both private and group conversations. The
+                  backend handles live messaging through WebSockets, ensuring
+                  messages are delivered instantly without page reloads. Users can
+                  create and join groups, manage conversations, and interact
+                  through a clean role-aware interface — all backed by a structured
+                  API that keeps the system organized as it scales.
                 </p>
                 <ul class="tags">
-                  <li>LLMs</li>
-                  <li>RAG</li>
-                  <li>Embeddings</li>
-                  <li>Vector stores</li>
-                  <li>Re-ranking</li>
+                  <li>Node.js</li>
+                  <li>Express</li>
+                  <li>PostgreSQL</li>
+                  <li>WebSockets</li>
                 </ul>
                 <!-- Add a link here once the project has a public URL:
                 <a href="https://…" class="project-link">View project →</a> -->
@@ -2113,7 +2059,6 @@
                 <li>Genkit</li>
                 <li>PostgreSQL</li>
                 <li>Vector stores</li>
-                <li>OpenCV</li>
               </ul>
             </div>
           </article>
@@ -2521,7 +2466,7 @@
             ],
             projects: () => [
               kv("01", "AI-powered classroom monitoring system"),
-              kv("02", "Grounded AI Assistants"),
+              kv("02", "ChatCord — real-time chat"),
               dim("→ cd projects for details"),
             ],
             stack: () => [
